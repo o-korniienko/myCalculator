@@ -220,17 +220,20 @@ public class Controller {
                 s2 = tx.getText();
                 c = Double.parseDouble(s2);
                 d2 = BigDecimal.valueOf(c);
-                if (s0 == "-")
-                    d1 = d1.subtract(d2);
-                else if (s0 == "+") d1 = d1.add(d2);
-                if (s0 == "*") d1 = d1.multiply(d2);
-                if (s0 == "/") d1 = d1.divide(d2, 4, BigDecimal.ROUND_HALF_UP);
-                if (s0 == "k") d = Math.pow(i, c);
-                if (s0 == "k") d1 = BigDecimal.valueOf(d);
-                if (s0 == "l") tx.setText("");
-
-                s = String.valueOf(d1);
-                tx.setText(s);
+                try {
+                    if (s0 == "-")
+                        d1 = d1.subtract(d2);
+                    else if (s0 == "+") d1 = d1.add(d2);
+                    if (s0 == "*") d1 = d1.multiply(d2);
+                    if (s0 == "/") d1 = d1.divide(d2, 6, BigDecimal.ROUND_HALF_UP);
+                    if (s0 == "k") d = Math.pow(i, c);
+                    if (s0 == "k") d1 = BigDecimal.valueOf(d);
+                    if (s0 == "l") tx.setText("");
+                    s = String.valueOf(d1);
+                    tx.setText(s);
+                } catch (Exception e) {
+                    tx.setText("ДІЛЕННЯ НА НУЛЬ НЕМОЖЛИВЕ!!!");
+                }
             }
         });
     }
