@@ -27,19 +27,20 @@
       </ButtonBar>
       <ButtonBar layoutX="-32.0" layoutY="188.0" prefHeight="40.0" prefWidth="200.0">
          <buttons>
-            <Button fx:id="bq" mnemonicParsing="false"  text="." />
+            <Button fx:id="bPoint" mnemonicParsing="false" text="." />
             <Button fx:id="b0" layoutX="135.0" layoutY="18.0" mnemonicParsing="false"  text="0" />
          </buttons>
       </ButtonBar>
-      <Button fx:id="be" layoutX="267.0" layoutY="63.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" text="-" />
-      <Button fx:id="br" layoutX="267.0" layoutY="108.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" text="+" />
-      <Button fx:id="bt" layoutX="267.0" layoutY="152.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" text="*" />
-      <Button fx:id="by" layoutX="267.0" layoutY="196.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" text="/" />
-      <Button fx:id="bc" layoutX="280.0" layoutY="14.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="c" textFill="#0f0f0f" />
-      <Button fx:id="bx" layoutX="325.0" layoutY="14.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="x" textFill="#0f0f0f" />
-      <Button fx:id="bl" layoutX="320.0" layoutY="63.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" text="√" textFill="#0f0f0f" />
-      <Button fx:id="bk" layoutX="320.0" layoutY="108.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" text="^x" textFill="#0f0f0f" />
+      <Button fx:id="bSubtract" layoutX="267.0" layoutY="63.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" text="-" />
+      <Button fx:id="bAdd" layoutX="267.0" layoutY="108.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" text="+" />
+      <Button fx:id="bMultiply" layoutX="267.0" layoutY="152.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" text="*" />
+      <Button fx:id="bDivide" layoutX="267.0" layoutY="196.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" text="/" />
+      <Button fx:id="bClearAll" layoutX="280.0" layoutY="14.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="CE" textFill="#0f0f0f" />
+      <Button fx:id="bClearOne" layoutX="325.0" layoutY="14.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="C" textFill="#0f0f0f" />
+      <Button fx:id="bSqrt" layoutX="320.0" layoutY="63.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" text="√" textFill="#0f0f0f" />
+      <Button fx:id="bPow" layoutX="320.0" layoutY="108.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" text="^x" textFill="#0f0f0f" />
+      <Button fx:id="bPercentages" layoutX="320.0" layoutY="153.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" text="\%" textFill="#0f0f0f" />
       <TextField fx:id="tx" layoutX="14.0" layoutY="14.0" prefHeight="40.0" prefWidth="265.0" />
-      <Button fx:id="bw" layoutX="180.0" layoutY="196.0" mnemonicParsing="false"  prefHeight="25.0" prefWidth="75.0" text="=" />
+      <Button fx:id="bResult" layoutX="180.0" layoutY="196.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="=" />
    </children>
 </AnchorPane>

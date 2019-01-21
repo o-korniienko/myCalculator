@@ -11,13 +11,13 @@ import java.math.BigDecimal;
 public class Controller {
 
     @FXML
-    private Button bc;
+    private Button bClearAll;
     @FXML
-    private Button bk;
+    private Button bPow;
     @FXML
-    private Button bl;
+    private Button bSqrt;
     @FXML
-    private Button bx;
+    private Button bClearOne;
     @FXML
     private Button b1;
     @FXML
@@ -39,48 +39,50 @@ public class Controller {
     @FXML
     private Button b0;
     @FXML
-    private Button bq;
+    private Button bPoint;
     @FXML
-    private Button bw;
+    private Button bResult;
     @FXML
-    private Button be;
+    private Button bSubtract;
     @FXML
-    private Button br;
+    private Button bAdd;
     @FXML
-    private Button bt;
+    private Button bMultiply;
     @FXML
-    private Button by;
+    private Button bDivide;
     @FXML
     private TextField tx;
+    @FXML
+    private Button bPercentages;
 
-    String s0;
-    String s1;
-    String s2;
-    String s;
-    double d1;
-    double d2;
-    double d3;
+    String actionStr;
+    String numberOne;
+    String numberTwo;
     BigDecimal big1;
     BigDecimal big2;
 
     @FXML
     public void initialize() {
 
-        bc.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        bClearAll.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 tx.setText("");
+                big1 = null;
+                big2 = null;
             }
         });
-        bx.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        bClearOne.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (tx.getText().isEmpty())
+                if (tx.getText().isEmpty()) {
+                    big1 = null;
+                    big2 = null;
                     return;
-                else {
-                    s1 = tx.getText();
-                    s2 = s1.substring(0, s1.length() - 1);
-                    tx.setText(s2);
+                } else {
+                    numberOne = tx.getText();
+                    numberTwo = numberOne.substring(0, numberOne.length() - 1);
+                    tx.setText(numberTwo);
                 }
             }
         });
@@ -144,146 +146,145 @@ public class Controller {
                 tx.setText(tx.getText() + "0");
             }
         });
-        bq.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        bPoint.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 tx.setText(tx.getText() + ".");
             }
         });
-        be.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        bSubtract.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                s1 = tx.getText();
-                if (s1.equals("-")) return;
+                if (tx.getText().equals("-")) return;
                 else {
-                    if (s1.isEmpty()) tx.setText("-");
+                    if (tx.getText().isEmpty()) tx.setText("-");
                     else {
-                        try {
-                            d1 = Double.parseDouble(s1);
-                            big1 = BigDecimal.valueOf(d1);
-                            tx.setText("");
-                            s0 = "-";
-                        } catch (NumberFormatException e) {
-                            tx.setText("please enter the numbers");
-                        }
+                        getSet();
+                        actionStr = "-";
                     }
                 }
             }
 
         });
-        br.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        bAdd.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (tx.getText().equals("") || tx.getText().equals("-")) return;
+                if (tx.getText().equals("-")) return;
                 else {
-                    try {
-                        s1 = tx.getText();
-                        d1 = Double.parseDouble(s1);
-                        big1 = BigDecimal.valueOf(d1);
-                        tx.setText("");
-                        s0 = "+";
-                    } catch (NumberFormatException e) {
-                        tx.setText("please enter the numbers");
-                    }
+                    getSet();
+                    actionStr = "+";
                 }
             }
         });
-        bt.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        bMultiply.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (tx.getText().equals("") || tx.getText().equals("-")) return;
+                if (tx.getText().equals("-")) return;
                 else {
-                    try {
-                        s1 = tx.getText();
-                        d1 = Double.parseDouble(s1);
-                        big1 = BigDecimal.valueOf(d1);
-                        tx.setText("");
-                        s0 = "*";
-                    } catch (NumberFormatException e) {
-                        tx.setText("please enter the numbers");
-                    }
+                    getSet();
+                    actionStr = "*";
                 }
             }
         });
-        by.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        bDivide.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (tx.getText().equals("") || tx.getText().equals("-")) return;
+                if (tx.getText().equals("-")) return;
                 else {
-                    try {
-                        s1 = tx.getText();
-                        d1 = Double.parseDouble(s1);
-                        big1 = BigDecimal.valueOf(d1);
-                        tx.setText("");
-                        s0 = "/";
-                    } catch (NumberFormatException e) {
-                        tx.setText("please enter the numbers");
-                    }
+                    getSet();
+                    actionStr = "/";
                 }
             }
         });
-        bl.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        bSqrt.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (tx.getText().equals("") || tx.getText().equals("-")) return;
+                if (tx.getText().equals("-")) return;
                 if (tx.getText().contains("-")) return;
                 else {
                     try {
-                        s1 = tx.getText();
-                        d1 = Double.parseDouble(s1);
-                        d3 = Math.sqrt(d1);
-                        big1 = BigDecimal.valueOf(d3);
-                        s = String.valueOf(big1);
+                        numberOne = tx.getText();
+                        big1 = BigDecimal.valueOf(Math.sqrt(Double.parseDouble(numberOne)));
+                        double sQ = big1.doubleValue();
+                        if (sQ % 1 == 0) {
+                            int sQr = (int) sQ;
+                            tx.setText(String.valueOf(sQr));
+                            big1 = null;
+                            big2 = null;
+                        } else {
+                            tx.setText(String.valueOf(big1));
+                            actionStr = "l";
+                            big1 = null;
+                            big2 = null;
+                        }
+                    } catch (NumberFormatException e) {
+                        tx.setText("please enter the numbers");
+                    }
+                }
+            }
+        });
+        bPow.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (tx.getText().equals("-")) return;
+                else {
+                    getSet();
+                    actionStr = "k";
 
-                        tx.setText(s);
-                        s0 = "l";
-                    } catch (NumberFormatException e) {
-                        tx.setText("please enter the numbers");
-                    }
                 }
             }
         });
-        bk.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        bPercentages.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (tx.getText().equals("") || tx.getText().equals("-")) return;
+                if (tx.getText().equals("-")) return;
                 else {
-                    try {
-                        s1 = tx.getText();
-                        d1 = Double.parseDouble(s1);
-                        big1 = BigDecimal.valueOf(d1);
-                        tx.setText("");
-                        s0 = "k";
-                    } catch (NumberFormatException e) {
-                        tx.setText("please enter the numbers");
-                    }
+                    getSet();
+                    actionStr = "%";
                 }
+
             }
         });
-        bw.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        bResult.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (s0 == null || tx.getText().isEmpty() || tx.getText().equals("-")) return;
+                if (actionStr == null || tx.getText().isEmpty() || tx.getText().equals("-")) return;
                 else {
                     try {
-                        s2 = tx.getText();
-                        d2 = Double.parseDouble(s2);
-                        big2 = BigDecimal.valueOf(d2);
-                        if (s0 == "/" && d2 == 0) {
+                        numberTwo = tx.getText();
+                        big2 = BigDecimal.valueOf(Double.parseDouble(numberTwo));
+                        if (big1 == null || big2 == null) {
+                            return;
+                        }
+                        if (actionStr == "/" && Double.parseDouble(numberTwo) == 0) {
                             tx.setText("can not divide by zero");
                         } else {
-                            if (s0 == "-")
+                            if (actionStr == "-")
                                 big1 = big1.subtract(big2);
-                            else if (s0 == "+") big1 = big1.add(big2);
-                            if (s0 == "*") big1 = big1.multiply(big2);
-                            if (s0 == "/") big1 = big1.divide(big2, 2, BigDecimal.ROUND_HALF_UP);
-                            if (s0 == "k") {
-                                d3 = Math.pow(d1, d2);
-                                big1 = BigDecimal.valueOf(d3);
+                            else if (actionStr == "+") big1 = big1.add(big2);
+                            if (actionStr == "*") big1 = big1.multiply(big2);
+                            if (actionStr == "/") big1 = big1.divide(big2, 5, BigDecimal.ROUND_HALF_UP);
+                            if (actionStr == "k") {
+                                big1 = BigDecimal.valueOf(Math.pow(Double.valueOf(numberOne), Double.parseDouble(numberTwo)));
                             }
-                            if (s0 == "l") tx.setText("");
-                            s = String.valueOf(big1);
-                            tx.setText(s);
+                            if (actionStr == "l") {
+                                tx.setText("");
+                            }
+                            if (actionStr == "%") {
+                                BigDecimal big3 = BigDecimal.valueOf(100);
+                                big1 = big2.divide(big3).multiply(big1);
+                            }
+                            double result = big1.doubleValue();
+                            if (result % 1 == 0) {
+                                int resultInt = (int) result;
+                                tx.setText(String.valueOf(resultInt));
+                                big1 = null;
+                                big2 = null;
+                            } else {
+                                tx.setText(String.valueOf(big1));
+                                big1 = null;
+                                big2 = null;
+                            }
                         }
                     } catch (NumberFormatException e) {
                         tx.setText("please enter the numbers");
@@ -292,5 +293,15 @@ public class Controller {
                 }
             }
         });
+    }
+
+    public void getSet() {
+        try {
+            numberOne = tx.getText();
+            big1 = BigDecimal.valueOf(Double.parseDouble(numberOne));
+            tx.setText("");
+        } catch (NumberFormatException e) {
+            tx.setText("please enter the numbers");
+        }
     }
 }

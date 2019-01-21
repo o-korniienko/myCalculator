@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="javafx" build-on-make="true" name="myCalculator">
-    <output-path>D:/Курси java/Aplications/Calculatorjar</output-path>
+    <output-path>$PROJECT_DIR$/out/artifacts/myCalculator</output-path>
     <properties id="javafx-properties">
       <options>
         <option name="appClass" value="calculator.Main" />
@@ -14,9 +14,6 @@
     <root id="root">
       <element id="archive" name="myCalculator.jar">
         <element id="module-output" name="myCalculator" />
-        <element id="directory" name="META-INF">
-          <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
-        </element>
       </element>
     </root>
   </artifact>
