@@ -55,11 +55,13 @@ public class Controller {
     @FXML
     private Button bPercentages;
 
-    String actionStr;
+    String indexAction;
     String numberOne;
     String numberTwo;
     BigDecimal big1;
     BigDecimal big2;
+    int test1;
+    int test2;
 
     @FXML
     public void initialize() {
@@ -67,17 +69,28 @@ public class Controller {
         bClearAll.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                tx.setText("");
-                big1 = null;
-                big2 = null;
+                if (tx.getText().contains("r")) {
+                    tx.setText("");
+                } else {
+                    tx.setText("");
+                    big1 = null;
+                    big2 = null;
+                    test1 = 0;
+                    test2 = 0;
+                    indexAction = null;
+                }
             }
         });
+
         bClearOne.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 if (tx.getText().isEmpty()) {
                     big1 = null;
                     big2 = null;
+                    test1 = 0;
+                    test2 = 0;
+                    indexAction = null;
                     return;
                 } else {
                     numberOne = tx.getText();
@@ -86,72 +99,86 @@ public class Controller {
                 }
             }
         });
+
         b1.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                tx.setText(tx.getText() + "1");
+                clickOnNumber("1");
             }
         });
+
         b2.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                tx.setText(tx.getText() + "2");
+                clickOnNumber("2");
             }
         });
+
         b3.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                tx.setText(tx.getText() + "3");
+                clickOnNumber("3");
             }
         });
+
         b4.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                tx.setText(tx.getText() + "4");
+                clickOnNumber("4");
             }
         });
+
         b5.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                tx.setText(tx.getText() + "5");
+                clickOnNumber("5");
             }
         });
+
         b6.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                tx.setText(tx.getText() + "6");
+                clickOnNumber("6");
             }
         });
+
         b7.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                tx.setText(tx.getText() + "7");
+                clickOnNumber("7");
             }
         });
+
         b8.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                tx.setText(tx.getText() + "8");
+                clickOnNumber("8");
             }
         });
+
         b9.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                tx.setText(tx.getText() + "9");
+                clickOnNumber("9");
             }
         });
+
         b0.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                tx.setText(tx.getText() + "0");
+                clickOnNumber("0");
             }
         });
+
         bPoint.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                tx.setText(tx.getText() + ".");
+                if (test1 == 1) return;
+                if (tx.getText().isEmpty()) return;
+                else tx.setText(tx.getText() + ".");
             }
         });
+
         bSubtract.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -159,48 +186,47 @@ public class Controller {
                 else {
                     if (tx.getText().isEmpty()) tx.setText("-");
                     else {
-                        getSet();
-                        actionStr = "-";
+                        setButtonAction("-");
                     }
                 }
             }
 
         });
+
         bAdd.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (tx.getText().equals("-")) return;
+                if (tx.getText().equals("-") || tx.getText().isEmpty()) return;
                 else {
-                    getSet();
-                    actionStr = "+";
+                    setButtonAction("+");
                 }
             }
         });
+
         bMultiply.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (tx.getText().equals("-")) return;
+                if (tx.getText().equals("-") || tx.getText().isEmpty()) return;
                 else {
-                    getSet();
-                    actionStr = "*";
+                    setButtonAction("*");
                 }
             }
         });
+
         bDivide.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (tx.getText().equals("-")) return;
+                if (tx.getText().equals("-") || tx.getText().isEmpty()) return;
                 else {
-                    getSet();
-                    actionStr = "/";
+                    setButtonAction("/");
                 }
             }
         });
+
         bSqrt.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (tx.getText().equals("-")) return;
-                if (tx.getText().contains("-")) return;
+                if (tx.getText().equals("-") || tx.getText().isEmpty() || tx.getText().contains("-")) return;
                 else {
                     try {
                         numberOne = tx.getText();
@@ -213,7 +239,6 @@ public class Controller {
                             big2 = null;
                         } else {
                             tx.setText(String.valueOf(big1));
-                            actionStr = "l";
                             big1 = null;
                             big2 = null;
                         }
@@ -223,32 +248,32 @@ public class Controller {
                 }
             }
         });
+
         bPow.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (tx.getText().equals("-")) return;
+                if (tx.getText().equals("-") || tx.getText().isEmpty()) return;
                 else {
-                    getSet();
-                    actionStr = "k";
-
+                    setButtonAction("k");
                 }
             }
         });
+
         bPercentages.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (tx.getText().equals("-")) return;
+                if (tx.getText().equals("-") || tx.getText().isEmpty()) return;
                 else {
-                    getSet();
-                    actionStr = "%";
+                    setButtonAction("%");
                 }
 
             }
         });
+
         bResult.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (actionStr == null || tx.getText().isEmpty() || tx.getText().equals("-")) return;
+                if (indexAction == null || tx.getText().isEmpty() || tx.getText().equals("-")) return;
                 else {
                     try {
                         numberTwo = tx.getText();
@@ -256,38 +281,14 @@ public class Controller {
                         if (big1 == null || big2 == null) {
                             return;
                         }
-                        if (actionStr == "/" && Double.parseDouble(numberTwo) == 0) {
-                            tx.setText("can not divide by zero");
-                        } else {
-                            if (actionStr == "-")
-                                big1 = big1.subtract(big2);
-                            else if (actionStr == "+") big1 = big1.add(big2);
-                            if (actionStr == "*") big1 = big1.multiply(big2);
-                            if (actionStr == "/") big1 = big1.divide(big2, 5, BigDecimal.ROUND_HALF_UP);
-                            if (actionStr == "k") {
-                                big1 = BigDecimal.valueOf(Math.pow(Double.valueOf(numberOne), Double.parseDouble(numberTwo)));
-                            }
-                            if (actionStr == "l") {
-                                tx.setText("");
-                            }
-                            if (actionStr == "%") {
-                                BigDecimal big3 = BigDecimal.valueOf(100);
-                                big1 = big2.divide(big3).multiply(big1);
-                            }
-                            double result = big1.doubleValue();
-                            if (result % 1 == 0) {
-                                int resultInt = (int) result;
-                                tx.setText(String.valueOf(resultInt));
-                                big1 = null;
-                                big2 = null;
-                            } else {
-                                tx.setText(String.valueOf(big1));
-                                big1 = null;
-                                big2 = null;
-                            }
-                        }
-                    } catch (NumberFormatException e) {
-                        tx.setText("please enter the numbers");
+                        doAction(indexAction);
+                        big1 = null;
+                        big2 = null;
+                        test1 = 0;
+                        test2 = 0;
+                        indexAction = null;
+                    } catch (Exception e) {
+                        tx.setText("can not divide by zero");
                     }
 
                 }
@@ -302,6 +303,58 @@ public class Controller {
             tx.setText("");
         } catch (NumberFormatException e) {
             tx.setText("please enter the numbers");
+        }
+    }
+
+    private void doAction(String actionStr) {
+        if (actionStr == null) return;
+        if (actionStr == "-") big1 = big1.subtract(big2);
+        if (actionStr == "+") big1 = big1.add(big2);
+        if (actionStr == "*") big1 = big1.multiply(big2);
+        if (actionStr == "/") big1 = big1.divide(big2, 5, BigDecimal.ROUND_HALF_UP);
+        if (actionStr == "k") {
+            big1 = BigDecimal.valueOf(Math.pow(Double.valueOf(numberOne), Double.parseDouble(numberTwo)));
+        }
+        if (actionStr == "%") {
+            BigDecimal big3 = BigDecimal.valueOf(100);
+            big1 = big2.divide(big3).multiply(big1);
+        }
+        double result = big1.doubleValue();
+        if (result % 1 == 0) {
+            int resultInt = (int) result;
+            tx.setText(String.valueOf(resultInt));
+        } else {
+            tx.setText(String.valueOf(big1));
+        }
+    }
+
+    private void clickOnNumber(String numb) {
+        if (test1 == 1) {
+            tx.setText(numb);
+            test1 = 0;
+            test2 = 0;
+        } else {
+            tx.setText(tx.getText() + numb);
+            test2 = 0;
+        }
+    }
+
+    private void setButtonAction(String action) {
+        if (indexAction == null) {
+            getSet();
+            indexAction = action;
+        } else {
+            if (test2 == 1) {
+                return;
+            } else {
+                numberTwo = tx.getText();
+                big2 = BigDecimal.valueOf(Double.parseDouble(numberTwo));
+                doAction(indexAction);
+                big1 = BigDecimal.valueOf(Double.parseDouble(tx.getText()));
+                test1 = 1;
+                test2 = 1;
+                indexAction = action;
+            }
         }
     }
 }
